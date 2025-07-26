@@ -4,6 +4,7 @@
     --black: #000;
     --blue: #4CBEFE;
     --off-whitish: #c9c9c9;
+    --blackish: #232323;
   }
 
 * {
@@ -19,6 +20,8 @@ hr {
 }
 
 body {
+    width: 100%;
+    overflow-x: hidden;
     background-color: #000;
 }   
 
@@ -28,8 +31,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 50px;
-    background-color: #111;
-    color: #fff;
+    background-color: var(--black);
+    color: var(--white);
 }
 
 /*HERO SECTION*/
@@ -57,7 +60,7 @@ body {
     font-family: "Montserrat", sans-serif;
     font-size: 50px;
     font-weight: 400;
-    color: #fff;
+    color: var(--white);
     text-align: center;
 }
 
@@ -65,7 +68,7 @@ body {
     font-family: "Montserrat", sans-serif;
     font-size: 20px;
     font-weight: 300;
-    color: #C9C9C9;
+    color: var(--off-whitish);
     text-align: center;
 }
 
@@ -81,7 +84,7 @@ body {
 .hero .btn1{
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    background-color: #d9d9d9;
+    background-color: var(--off-whitish);
     border: none;
     border-radius: 50px;
     height: 40px;
@@ -92,8 +95,8 @@ body {
 .hero .btn2{
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
-    color: #c9c9c9;
-    background-color: #232323;
+    color: var(--off-whitish);
+    background-color: var(--blackish);
     border: none;
     border-radius: 50px;
     height: 40px;
@@ -103,13 +106,13 @@ body {
 
 .hero .btn2:hover{
     background-color: #222;
-    color: #fff;
-    border: 1px solid #fff;
+    color: var(--white);
+    border: 1px solid var(--white);
 }
 
 .hero .btn1:hover{
-    background-color: #fff;
-    color: #000;
+    background-color: var(--white);
+    color: var(--black);
 }
 
 /*FOOTER*/
