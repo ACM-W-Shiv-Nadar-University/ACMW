@@ -1,8 +1,21 @@
 /*PRE-REQUISITES*/
+:root {
+    --white: #fff;
+    --black: #000;
+    --blue: #4CBEFE;
+    --off-whitish: #c9c9c9;
+  }
+
 * {
     margin: 0;
     padding: 0; 
     box-sizing: border-box;
+}
+
+hr {
+    width: 85%;
+    border-color: var(--lighter-bg-color);
+    transition: 0.4s !important;
 }
 
 body {
@@ -97,4 +110,58 @@ body {
 .hero .btn1:hover{
     background-color: #fff;
     color: #000;
+}
+
+/*FOOTER*/
+.footer{
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    background-color: var(--black);
+    color: var(--off-whitish);
+    padding-top: 5%;
+    padding-bottom: 2%;
+    text-align: left;
+}
+  
+.footer .row{
+    padding: 1%;
+}
+  
+.footer .col-md-2{
+    padding: 1%;
+}
+  
+.footer h1{
+    font-family: "Montserrat", sans-serif;
+    color: var(--white);
+    font-size: 30px;
+    text-align: left;
+    font-weight: 500;
+}
+  
+.footer p{
+    padding: 1%;
+    font-size: 14px;
+}
+
+.footer hr{
+    margin-top: 30px;
+}
+  
+.footer h2{
+    padding: 1%;
+    font-size: 18px;
+    font-weight: 400;
+}
+  
+.footer img{
+    height: 200px;
+    width: 75%;
+    transition: 0.4s;
+    padding-bottom: 2%;
+    padding: 1%;
+}
+  
+  .footer img:hover{
+    transform: scaleX(1.1) scaleY(1.1);
 }
