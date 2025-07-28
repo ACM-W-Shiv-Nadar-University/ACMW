@@ -43,7 +43,7 @@ body {
 
 .nav-links {
     background-color: #111;
-    padding: 10px 25px;
+    padding: 12px 25px;
     border-radius: 50px;
     display: flex;
     gap: 30px;
@@ -57,7 +57,7 @@ body {
     font-weight: 300;
     color: var(--off-whitish);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 13px;
     transition: color 0.3s ease;
   }
   
@@ -69,10 +69,10 @@ body {
     font-family: "Montserrat", sans-serif;
     margin-right: 20px;
     background: transparent;
-    font-size: 15px;
+    font-size: 13px;
     color: var(--off-whitish);
     border: 1px solid var(--off-whitish);
-    padding: 8px 20px;
+    padding: 7px 20px;
     border-radius: 50px;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -258,7 +258,7 @@ body {
     
 }
 
-/*ABOUT SECTIOaN*/
+/*ABOUT SECTION*/
 .about{
     display: flex;
     align-items: center;
@@ -284,12 +284,12 @@ body {
   
   /* Columns */
   .image-column {
-    flex: 0 1 40%; /* ✅ smaller image column */
+    flex: 0 1 40%; 
     text-align: center;
   }
   
   .text-column {
-    flex: 0 1 52%; /* ✅ wider text column */
+    flex: 0 1 52%; 
   }
   
   
@@ -338,6 +338,48 @@ body {
     }
   }
 
+/*SERVICES SECTION*/
+.what-we-do {
+    background-color: #000;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .what-we-do .text {
+    color: #ccc;
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+  
+  .services {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  
+  .service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .service img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #2980b9;
+    padding: 20px;
+  }
+  
+  .service p {
+    margin-top: 10px;
+    color: white;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+  }
+  
 /*FOOTER*/
 .footer{
     font-family: "Poppins", sans-serif;
