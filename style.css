@@ -35,6 +35,11 @@ body {
     color: var(--white);
 }
 
+.logo{
+    height: 40px;
+    width: auto;
+}
+
 /*HERO SECTION*/
 .hero{
     display: flex;
@@ -45,7 +50,7 @@ body {
     margin-right: auto;
     height: 700px;
     width: 1320px;
-    margin-top: 20px;
+    margin-top: 10px;
     background-image: url('lib/bgimg.png');
     border-radius: 20px;
     background-size: cover;
@@ -113,6 +118,31 @@ body {
 .hero .btn1:hover{
     background-color: var(--white);
     color: var(--black);
+}
+
+@media screen and (max-width: 500px) {
+    .hero {
+        width: 100%;
+        overflow-x: hidden;
+        height: 500px;
+        background-image: url('lib/bgimg.png');
+        background-size: cover;
+    }
+    .hero h1 {
+        font-size: 25px;
+    }
+    .hero p {
+        font-size: 15px;
+    }
+    .hero .btn-group {
+        gap: 10px;
+    }
+    .hero .btn1, .hero .btn2 {
+        height: 35px;
+        width: 100px;
+        font-size: 12px;
+    }
+    
 }
 
 /*FOOTER*/
