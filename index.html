@@ -14,9 +14,38 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <!--NAVBAR-->
         <div class="navbar"> 
             <img src="lib/logo.png" alt="ACM-W Logo" class="logo">
+            <div class="nav-links">
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#">Team</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <button class="sm-btn">Lorem Ips</button>
+
+            <!-- Hamburger Icon -->
+            <div class="hamburger" onclick="toggleMenu()">
+                &#9776;
+            </div>
+            
+            <!-- Side Navigation (hidden on desktop) -->
+            <div id="side-nav" class="side-nav">
+                <a href="javascript:void(0)" onclick="toggleMenu()" class="close-btn">&times;</a>
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#">Team</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+              </div>
+            
+              <!-- Overlay -->
+              <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+              
         </div>
+
         <!--HERO SECTION-->
         <div class="hero">
             <div class="text-wrapper">
