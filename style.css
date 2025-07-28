@@ -284,12 +284,12 @@ body {
   
   /* Columns */
   .image-column {
-    flex: 0 1 35%; /* ✅ smaller image column */
+    flex: 0 1 40%; /* ✅ smaller image column */
     text-align: center;
   }
   
   .text-column {
-    flex: 0 1 50%; /* ✅ wider text column */
+    flex: 0 1 52%; /* ✅ wider text column */
   }
   
   
