@@ -383,46 +383,46 @@ body {
   }
 
   /*EVENTS SECTION*/
+.events{
+    margin: 30px auto;
+}
   .events .container {
     display: flex;
-    padding: 60px 100px;
+    padding: 60px 20px;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 10px;
   }
 
   .left-section {
-    max-width: 40%;
+    max-width: 50%;
   }
 
   .left-section h1 {
-    font-size: 3rem;
-    font-weight: 300;
+    font-family: "Montserrat", sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    color: var(--off-whitish);
     line-height: 1.2;
+    margin-top: 12%;
   }
 
   .left-section h1 span {
-    color: #33AFFF;
-    font-weight: 700;
+    color: var(--blue);
+    font-size: 60px;
   }
 
   .left-section p {
+    font-family: poppins, sans-serif;
+    font-weight: 200;
     margin-top: 20px;
-    color: #aaa;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    color: #ccc;
+    font-size: 17px;
+    line-height: 1.8;
   }
 
-  .view-button {
-    margin-top: 30px;
-    padding: 12px 28px;
-    border: 1px solid white;
-    background: transparent;
-    color: white;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  .minor{
+    margin-top: 15px;
   }
 
   .view-button:hover {
@@ -438,31 +438,42 @@ body {
   }
 
   .card {
+    justify-content: center;
     background-color: #111;
     border-radius: 12px;
     overflow: hidden;
     text-align: left;
-    padding: 20px;
-    height: 240px;
+    width: 370;
+    height: 250px;
     color: white;
     font-size: 0.9rem;
   }
 
+  .pad-card{
+    padding: 25px;
+  }
+
+
   .card img {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
     width: 100%;
-    height: auto;
+    height: 100%;
     border-radius: 12px;
-    margin-bottom: 10px;
   }
 
   .card h3 {
+    font-family: "Montserrat", sans-serif;
     font-size: 1rem;
-    margin: 10px 0 5px;
-    font-weight: 500;
+    margin: 10px 0 15px;
+    font-weight: 400;
   }
 
   .card p {
-    color: #ccc;
+    font-family: poppins, sans-serif;
+    font-weight: 200;
+    color: var(--off-whitish);
     font-size: 0.85rem;
   }
 
