@@ -496,24 +496,30 @@ body {
   }
 
   /*FUNNI*/
+.funni{
+    margin-top: 50px;
+    padding: 10px 0px;
+}
+
   .funni .line-row {
     display: flex;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
   }
 
   .line-row h1 {
-    color: #1e1e1e;
-    font-size: 70px;
-    font-weight: 700;
-    letter-spacing: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: var(--off-whitish);
+    font-size: 50px;
+    letter-spacing: 5px;
     margin: 0;
-    margin-right: 30px;
+    margin: 0 40px;
     flex-shrink: 0;
   }
 
   .line {
-    height: 12px;
+    height: 10px;
     flex-grow: 1;
     border: none;
     background: linear-gradient(to right, gray, #3fa6e0);
