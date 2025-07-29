@@ -494,6 +494,34 @@ body {
       margin-top: 30px;
     }
   }
+
+  /*FUNNI*/
+  .funni .line-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  .line-row h1 {
+    color: #1e1e1e;
+    font-size: 70px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    margin: 0;
+    margin-right: 30px;
+    flex-shrink: 0;
+  }
+
+  .line {
+    height: 12px;
+    flex-grow: 1;
+    border: none;
+    background: linear-gradient(to right, gray, #3fa6e0);
+  }
+
+  .reverse-line {
+    background: linear-gradient(to right, #3fa6e0, gray);
+  }
   
 /*FOOTER*/
 .footer{
