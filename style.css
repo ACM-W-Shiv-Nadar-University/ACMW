@@ -19,6 +19,14 @@ hr {
     transition: 0.4s !important;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 body {
     width: 100%;
     overflow-x: hidden;
@@ -530,6 +538,7 @@ body {
 
   /*COLLAGE*/
   .smth{
+    margin-bottom: 0px !important; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -541,6 +550,7 @@ body {
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 20px;
       max-width: 1200px;
+      height: auto;
       width: 90%;
       margin-top: 60px;
     }
@@ -553,7 +563,7 @@ body {
       box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transition: transform 0.4s ease;
       opacity: 0.8;
-      margin-bottom: 0px;
+      margin-bottom: 0px !important;
     }
 
     .collage img:hover {
@@ -563,11 +573,10 @@ body {
 
     /*TEAM IMG*/
     .team{
-      margin-top: 0px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: start;
+    justify-content: flex-end;
     margin: 0 auto;
     min-height: 600px;
     height: 900px;
@@ -575,6 +584,29 @@ body {
     background-image: url('lib/grpTeam.png');
     border-radius: 20px;
     background-size: cover;
+    }
+
+    .team h1{
+        font-family: "Montserrat", sans-serif;
+        font-size: 50px;
+        font-weight: 300;
+        color: var(--blue);
+        opacity: 0.8;
+        text-align: center;
+        padding: 5px 25px;
+    }
+
+    .team h1:hover{
+        opacity: 1;
+    }
+
+    .team p{
+        font-family: "poppins", sans-serif;
+        font-size: 17px;
+        font-weight: 200;
+        color: var(--off-whitish);
+        padding: 0px 30px;
+        padding-bottom: 40px;
     }
   
 /*FOOTER*/
