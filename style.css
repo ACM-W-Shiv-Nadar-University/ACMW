@@ -443,7 +443,7 @@ body {
     border-radius: 12px;
     overflow: hidden;
     text-align: left;
-    width: 370;
+    width: 400;
     height: 250px;
     color: white;
     font-size: 0.9rem;
@@ -528,6 +528,38 @@ body {
   .reverse-line {
     background: linear-gradient(to right, #3fa6e0, gray);
   }
+
+  /*COLLAGE*/
+  .smth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+
+  .collage {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      max-width: 1200px;
+      width: 90%;
+      margin-top: 50px;
+    }
+
+    .collage img {
+      width: 380px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .collage img:hover {
+      transform: scale(1.05);
+    }
   
 /*FOOTER*/
 .footer{
