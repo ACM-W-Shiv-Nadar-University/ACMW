@@ -545,7 +545,7 @@ body {
     flex-direction: column;
   }
 
-  .collage {
+  .imgCollage {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 20px;
@@ -555,7 +555,7 @@ body {
       margin-top: 60px;
     }
 
-    .collage img {
+    .imgCollage img {
       width: 380px;
       height: 280px;
       object-fit: cover;
@@ -566,7 +566,7 @@ body {
       margin-bottom: 0px !important;
     }
 
-    .collage img:hover {
+    .imgCollage img:hover {
       transform: scale(1.05);
       opacity: 1;
     }
@@ -593,7 +593,7 @@ body {
         color: var(--blue);
         opacity: 0.8;
         text-align: center;
-        padding: 5px 25px;
+        margin: 5px 35px;
     }
 
     .team h1:hover{
@@ -605,8 +605,8 @@ body {
         font-size: 17px;
         font-weight: 200;
         color: var(--off-whitish);
-        padding: 0px 30px;
-        padding-bottom: 40px;
+        margin: 0px 40px;
+        margin-bottom: 50px;
     }
   
 /*FOOTER*/
