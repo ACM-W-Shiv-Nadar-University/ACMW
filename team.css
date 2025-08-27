@@ -1,0 +1,166 @@
+/*COLOURS*/
+:root{
+    --white: #fff;
+    --black: #000;
+    --blue: #4CBEFE;
+    --off-whitish: #c9c9c9;
+    --blackish: #232323;
+}
+
+/*PRE-REQ*/
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #000;
+}
+
+/*NAVBAR*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.logo{
+    margin-left: 20px;
+    height: 42px;
+    width: auto;
+}
+
+.nav-links {
+    background-color: #111;
+    padding: 12px 25px;
+    border-radius: 50px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    margin:0 auto;
+  }
+  
+  .nav-links a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    color: var(--off-whitish);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: white;
+  }
+
+  .sm-btn {
+    font-family: "Montserrat", sans-serif;
+    margin-right: 20px;
+    background: transparent;
+    font-size: 14px;
+    color: var(--off-whitish);
+    border: 1px solid var(--off-whitish);
+    padding: 7px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .sm-btn:hover {
+    background-color: white;
+    color: black;
+  }
+
+  /*SIDE NAV*/
+  .hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  /* Side nav styles */
+  .side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 1001;
+  }
+  
+  .side-nav a {
+    padding: 12px 24px;
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    transition: 0.2s;
+  }
+  
+  .side-nav a:hover {
+    background-color: #333;
+  }
+  
+  .side-nav .close-btn {
+    text-align: right;
+    font-size: 24px;
+    padding-right: 20px;
+    display: block;
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+  }
+  
+  .overlay.active {
+    display: block;
+  }
+  
+  /* Responsive for mobile */
+  @media screen and (max-width: 768px) {
+    .nav-links,
+    .sm-btn {
+      display: none;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+  }
+
+  /*HERO*/
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+    color: var(--white);
+  }
+
+  .hero h1 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    text-align: center;
+    padding: 10px 70px;
+  }

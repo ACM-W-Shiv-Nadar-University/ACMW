@@ -538,11 +538,12 @@ body {
 
   /*COLLAGE*/
   .smth{
-    margin-bottom: 0px !important; 
+    margin-bottom: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
   }
 
   .imgCollage {
@@ -571,43 +572,77 @@ body {
       opacity: 1;
     }
 
+/* Phone screens */
+@media (max-width: 480px) {
+  .imgCollage {
+    grid-template-columns: 1fr;
+    grid-gap: 12px;
+  }
+  .imgCollage img {
+    height: 200px;
+    width: 350px;
+  }
+}
+
     /*TEAM IMG*/
-    .team{
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: flex-end;
-    margin: 0 auto;
-    min-height: 600px;
-    height: 900px;
-    width: 100%;
-    background-image: url('lib/grpTeam.png');
-    border-radius: 20px;
-    background-size: cover;
-    }
+    .team {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin: 0 auto;
+  min-height: 80vh;        /* Flexible height */
+  height: auto;            /* Let content define */
+  width: 100%;
+  background-image: url('lib/grpTeam.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  padding: 40px 20px;      /* Safer spacing */
+  box-sizing: border-box;  /* Prevent overflow */
+}
 
-    .team h1{
-        font-family: "Montserrat", sans-serif;
-        font-size: 50px;
-        font-weight: 300;
-        color: var(--blue);
-        opacity: 0.8;
-        text-align: center;
-        margin: 5px 35px;
-    }
+.team h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(28px, 5vw, 50px);  
+  font-weight: 300;
+  color: var(--blue);
+  opacity: 0.8;
+  text-align: center;
+  margin: 5px 20px;
+}
 
-    .team h1:hover{
-        opacity: 1;
-    }
+.team h1:hover {
+  opacity: 1;
+}
 
-    .team p{
-        font-family: "poppins", sans-serif;
-        font-size: 17px;
-        font-weight: 200;
-        color: var(--off-whitish);
-        margin: 0px 40px;
-        margin-bottom: 50px;
-    }
+.team p {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(14px, 2vw, 17px);  
+  font-weight: 200;
+  color: var(--off-whitish);
+  margin: 10px 20px 40px 20px;
+  max-width: 700px;     
+  line-height: 1.6;
+}
+
+/* Phone screens */
+@media (max-width: 480px) {
+  .team {
+    border-radius: 12px;
+    padding: 20px 12px;
+  }
+
+  .team h1 {
+    margin: 5px 10px;
+  }
+
+  .team p {
+    font-size: 14px;
+    margin: 8px 10px 20px 10px;
+  }
+}
+
   
 /*FOOTER*/
 .footer{

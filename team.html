@@ -1,0 +1,56 @@
+<!DOCTYPE html>\
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>ACM-W|Team</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="team.css">
+    </head>
+    <body>
+        <!--NAVBAR-->
+        <div class="navbar"> 
+            <img src="lib/logo.png" alt="ACM-W Logo" class="logo">
+            <div class="nav-links">
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="team.html">Team</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <button class="sm-btn">Lorem Ips</button>
+
+            <!-- Hamburger Icon -->
+            <div class="hamburger" onclick="toggleMenu()">
+                &#9776;
+            </div>
+            
+            <!-- Side Navigation (hidden on desktop) -->
+            <div id="side-nav" class="side-nav">
+                <a href="javascript:void(0)" onclick="toggleMenu()" class="close-btn">&times;</a>
+                <a href="index.html">Home</a>
+                <a href="#">Events</a>
+                <a href="#">Team</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+              </div>
+            
+              <!-- Overlay -->
+              <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+        </div>
+
+        <!--TEAM SECTION-->
+        <div class="hero">
+            <h1>MEET OUR TEAM</h1>
+        </div>
+        
+        <script src="index.js"></script>
+    </body>
+</html>
