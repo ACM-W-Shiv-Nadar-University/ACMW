@@ -15,7 +15,7 @@
 }
 
 hr {
-    width: 85%;
+    width: 90%;
     border-color: var(--blackish);
     transition: 0.4s !important;
     margin: 5px auto;
@@ -178,8 +178,9 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    padding: 10px 70px;
+    gap: 90px;
+    margin: 15px auto;
+    padding: 10px 10px;
 }
 
 .cards {
