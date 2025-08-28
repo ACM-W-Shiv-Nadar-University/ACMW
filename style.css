@@ -591,15 +591,15 @@ body {
   align-items: flex-start;
   justify-content: flex-end;
   margin: 0 auto;
-  min-height: 80vh;        /* Flexible height */
-  height: auto;            /* Let content define */
+  min-height: 80vh;    
+  height: auto;            
   width: 100%;
   background-image: url('lib/grpTeam.png');
   background-size: cover;
   background-position: center;
   border-radius: 20px;
-  padding: 40px 20px;      /* Safer spacing */
-  box-sizing: border-box;  /* Prevent overflow */
+  padding: 40px 20px;      
+  box-sizing: border-box;  
 }
 
 .team h1 {

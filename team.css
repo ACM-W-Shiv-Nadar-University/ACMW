@@ -14,6 +14,13 @@
     box-sizing: border-box;
 }
 
+hr {
+    width: 85%;
+    border-color: var(--blackish);
+    transition: 0.4s !important;
+    margin: 5px auto;
+}
+
 body{
     background-color: #000;
 }
@@ -164,3 +171,53 @@ body{
     text-align: center;
     padding: 10px 70px;
   }
+
+  /*CARDS*/
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 70px;
+}
+
+.cards {
+    background-color: var(--white);
+    margin: 10px;
+    padding: 20px;
+    border-radius:5px;
+    text-align: center;
+}
+
+.cards img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.cards h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--black);
+    /*color: rgba(76, 190, 254, 0.6);*/
+    margin: 1px 0px;
+}
+
+.cards p {
+    font-family: "Poppins", sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--blackish);
+    margin: 5px 0px;
+    margin-top: 7px;
+}
+
+.cards .slang{
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    color: var(--blackish);
+}
