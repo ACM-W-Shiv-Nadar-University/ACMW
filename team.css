@@ -164,12 +164,16 @@ body{
 
   .hero h1 {
     font-family: "Montserrat", sans-serif;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 400;
-    margin-bottom: 20px;
-    margin-top: 30px;
-    text-align: center;
-    padding: 10px 70px;
+    color: var(--off-whitish);
+    line-height: 1.2;
+    margin: 50px auto;
+  }
+  
+  h1 span {
+    color: var(--blue);
+    font-size: 60px;
   }
 
   /*CARDS*/
@@ -178,7 +182,7 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 100px;
     margin: 10px auto;
     padding: 10px 10px;
 }
