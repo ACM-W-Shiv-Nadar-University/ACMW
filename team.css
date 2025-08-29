@@ -28,9 +28,9 @@ body{
 /*NAVBAR*/
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 20px 50px;
+    padding: 20px 40px;
     background-color: var(--black);
     color: var(--white);
 }
@@ -157,8 +157,8 @@ body{
   .hero {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: start;
+    align-items: center;
+    justify-content: center;
     color: var(--white);
   }
 
@@ -178,8 +178,8 @@ body{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 90px;
-    margin: 15px auto;
+    gap: 10px;
+    margin: 10px auto;
     padding: 10px 10px;
 }
 
