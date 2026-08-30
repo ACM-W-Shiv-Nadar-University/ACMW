@@ -4,15 +4,19 @@ function toggleMenu() {
   const sideNav = document.getElementById("side-nav");
   const overlay = document.getElementById("overlay");
 
+  if (!sideNav) return;
+
   if (sideNav.style.width === "250px") {
     closeMenu();
   } else {
     sideNav.style.width = "250px";
-    overlay.classList.add("active");
+    if (overlay) overlay.classList.add("active");
   }
 }
 
 function closeMenu() {
-  document.getElementById("side-nav").style.width = "0";
-  document.getElementById("overlay").classList.remove("active");
+  const sideNav = document.getElementById("side-nav");
+  const overlay = document.getElementById("overlay");
+  if (sideNav) sideNav.style.width = "0";
+  if (overlay) overlay.classList.remove("active");
 }
