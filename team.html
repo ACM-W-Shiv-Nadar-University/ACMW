@@ -1,169 +1,306 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>ACM-W | Team</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="team.css">
-    </head>
-    <body>
-        <!--NAVBAR-->
-        <div class="navbar">
-        <img src="lib/logo.png" alt="ACM-W Logo" class="logo" />
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#About">About</a>
-            <a href="events.html">Events</a>
-            <a href="#">Team</a>
-            <a href="index.html#footer">Contact</a>
-        </div>
-        <button class="sm-btn" onclick="window.location.href='https://www.linkedin.com/company/acm-w-shiv-nadar-institution-of-eminence-chapter/'">
-  Explore
-</button>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACM-W SNIOE</title>
+  <meta name="description" content="Core Operators and Leadership Team of ACM-W Shiv Nadar University Chapter." />
+  <meta name="theme-color" content="#09050e" />
 
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="lib/logo.png" />
+</head>
+<body>
 
-        <!-- Hamburger Icon -->
-        <div class="hamburger" onclick="toggleMenu()">
-            &#9776;
-        </div>
+  <!-- SCANLINES & RETRO NOISE OVERLAY -->
+  <div class="scanlines-overlay" aria-hidden="true"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="custom-cursor-follower" class="custom-cursor-follower" aria-hidden="true"></div>
 
-        <!-- Side Navigation (hidden on desktop) -->
-        <div id="side-nav" class="side-nav">
-            <a href="javascript:void(0)" onclick="closeMenu()" class="close-btn">&times;</a>
-            <a href="index.html">Home</a>
-            <a href="index.html#About">About</a>
-            <a href="events.html">Events</a>
-            <a href="team.html" onclick="closeMenu()">Team</a>
-            <a href="index.html#footer">Contact</a>
-        </div>
+  <!-- NAVIGATION DOCK -->
+  <header class="sys-navbar-container">
+    <nav class="sys-navbar" aria-label="System Navigation">
+      <a href="index.html" class="nav-brand">
+        <img src="lib/logo.png" alt="ACM-W SNIoE Logo" class="nav-logo-icon" />
+      </a>
 
-        <!-- Overlay -->
-        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+      <div class="nav-right-group">
+        <ul class="nav-links-wrap">
+          <li class="nav-link-item"><a href="index.html#home">Home</a></li>
+          <li class="nav-link-item"><a href="index.html#about">About</a></li>
+          <li class="nav-link-item"><a href="events.html">Events</a></li>
+          <li class="nav-link-item active"><a href="team.html">Team</a></li>
+          <li class="nav-link-item"><a href="index.html#scrapbook">Gallery</a></li>
+          <li class="nav-link-item"><a href="index.html#footer">Contact</a></li>
+        </ul>
+
+        <button class="cmd-k-trigger" aria-label="Open Command Palette">
+          <span>Search</span>
+        </button>
+      </div>
+
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </nav>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+    <div class="mobile-drawer-header">
+      <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--cyber-cyan); font-weight: 700;">ACM-W SNU</span>
+      <button id="btn-close-drawer" style="color: #fff; font-size: 1.4rem;">✕</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="index.html#scrapbook">Gallery</a></li>
+      <li><a href="index.html#footer">Contact</a></li>
+    </ul>
+    <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(0, 140, 255, 0.15);">
+      <button class="cmd-k-trigger" style="width: 100%; justify-content: center; padding: 12px;" aria-label="Open Search">
+        <span>🔍 Search Console</span>
+      </button>
+    </div>
+  </div>
+  <div id="drawer-overlay" class="drawer-overlay"></div>
+
+  <!-- COMMAND PALETTE MODAL -->
+  <div id="cmd-palette-backdrop" class="cmd-palette-backdrop">
+    <div class="cmd-palette-box">
+      <div class="cmd-search-input-wrap">
+        <span class="cmd-prompt-icon">></span>
+        <input type="text" id="cmd-search-input" class="cmd-search-input" placeholder="Search team members, roles, leads..." autocomplete="off" />
+      </div>
+      <ul id="cmd-results-list" class="cmd-results-list"></ul>
+      <div class="cmd-palette-footer">
+        <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate</span>
+        <span>Press <kbd>↵</kbd> to select</span>
+        <span><kbd>ESC</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="section-wrap" style="padding-top: 140px;">
+    <div style="margin-bottom: 30px;">
+      <span class="section-meta-tag">OFFICIAL ROSTER // CORE_TEAM.REG</span>
+      <h1 class="section-title">
+        MEET THE <span class="highlight-blue">TEAM</span>
+      </h1>
+      <p class="section-subtitle">
+        Meet the engineers, designers, strategists, and leaders powering ACM-W at Shiv Nadar Institution of Eminence.
+      </p>
     </div>
 
-        <!--TEAM SECTION-->
-        <div class="hero">
-            <h1>MEET OUR <span>TEAM</span></h1>
-            <div class="card-container">
-                <div class="cards">
-                    <img src="lib/team/paridhi.jpeg" alt="Member 1">
-                    <h2>Paridhi Kumar</h2>
-                    <center><hr></center>
-                    <p>Chairperson</p>
-                    <p class="slang">Keeps the club running</p>
-                </div>
+    <!-- TEAM FILTER TABS -->
+    <div class="team-filter-tabs" style="margin-bottom: 40px;">
+      <button class="team-tab-btn active" data-team="all">All Operators</button>
+      <button class="team-tab-btn" data-team="lead">Leadership</button>
+      <button class="team-tab-btn" data-team="tech">Tech & Design</button>
+      <button class="team-tab-btn" data-team="ops">Marketing & Events</button>
+    </div>
 
-                <div class="cards">
-                    <img src="lib/team/anvi.jpeg" alt="Member 1">
-                    <h2>Anvi Gupta</h2>
-                    <center><hr></center>
-                    <p>Vice Chairperson</p>
-                    <p class="slang">Looks like a Cinnamon Roll</p>
-                </div>
-            </div>
+    <div class="team-grid" style="margin-top: 36px;">
+      <!-- Paridhi Kumar -->
+      <div class="team-card" data-name="Paridhi Kumar" data-role="Chairperson" data-slang="Keeps the club running" data-dept="lead">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/paridhi.jpeg" alt="Paridhi Kumar" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Paridhi Kumar</h3>
+          <p class="team-role">Chairperson</p>
+          <p class="team-slang-quote">"Keeps the club running"</p>
+        </div>
+      </div>
 
-            <div class="card-container">
-                <div class="cards">
-                    <img src="lib/team/antara.jpeg" alt="Member 1">
-                    <h2>Antara Shyam</h2>
-                    <center><hr></center>
-                    <p>Secretary</p>
-                    <p class="slang">The Brain of the Club</p>
-                </div>
+      <!-- Anvi Gupta -->
+      <div class="team-card" data-name="Anvi Gupta" data-role="Vice Chairperson" data-slang="Looks like a Cinnamon Roll" data-dept="lead">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/anvi.jpeg" alt="Anvi Gupta" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Anvi Gupta</h3>
+          <p class="team-role">Vice Chairperson</p>
+          <p class="team-slang-quote">"Looks like a Cinnamon Roll"</p>
+        </div>
+      </div>
 
-                <div class="cards">
-                    <img src="lib/team/navya.jpeg" alt="Member 1">
-                    <h2>Navya Arora</h2>
-                    <center><hr></center>
-                    <p>Treasurer</p>
-                    <p class="slang">This is where the Money is</p>
-                </div>
+      <!-- Antara Shyam -->
+      <div class="team-card" data-name="Antara Shyam" data-role="Secretary" data-slang="The Brain of the Club" data-dept="lead">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/antara.jpeg" alt="Antara Shyam" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Antara Shyam</h3>
+          <p class="team-role">Secretary</p>
+          <p class="team-slang-quote">"The Brain of the Club"</p>
+        </div>
+      </div>
 
-                <div class="cards">
-                    <img src="lib/team/priyesi.jpg" alt="Member 1">
-                    <h2>Priyesi Taneja</h2>
-                    <center><hr></center>
-                    <p>Fresher Coordinator</p>
-                    <p class="slang">Driven by curiosity and creativity</p>
-                </div>
-            </div>
+      <!-- Navya Arora -->
+      <div class="team-card" data-name="Navya Arora" data-role="Treasurer" data-slang="This is where the Money is" data-dept="lead">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/navya.jpeg" alt="Navya Arora" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Navya Arora</h3>
+          <p class="team-role">Treasurer</p>
+          <p class="team-slang-quote">"This is where the Money is"</p>
+        </div>
+      </div>
 
-            <div class="card-container">
+      <!-- Priyesi Taneja -->
+      <div class="team-card" data-name="Priyesi Taneja" data-role="Fresher Coordinator" data-slang="Driven by curiosity and creativity" data-dept="lead">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/priyesi.jpg" alt="Priyesi Taneja" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Priyesi Taneja</h3>
+          <p class="team-role">Fresher Coordinator</p>
+          <p class="team-slang-quote">"Driven by curiosity and creativity"</p>
+        </div>
+      </div>
 
-                <div class="cards">
-                    <img src="lib/team/prachee.jpeg" alt="Member 1">
-                    <h2>Prachee Mahapatra</h2>
-                    <center><hr></center>
-                    <p>Technical Lead</p>
-                    <p class="slang">Codes and Stuff</p>
-                </div>
+      <!-- Prachee Mahapatra -->
+      <div class="team-card" data-name="Prachee Mahapatra" data-role="Technical Lead" data-slang="Codes and Stuff" data-dept="tech">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/prachee.jpeg" alt="Prachee Mahapatra" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Prachee Mahapatra</h3>
+          <p class="team-role">Technical Lead</p>
+          <p class="team-slang-quote">"Codes and Stuff"</p>
+        </div>
+      </div>
 
-                <div class="cards">
-                    <img src="lib/team/shree.jpeg" alt="Member 1">
-                    <h2>Shree Gattani</h2>
-                    <center><hr></center>
-                    <p>Technical Lead</p>
-                    <p class="slang">Codes and Stuff</p>
-                </div>
-                <div class="cards">
-                    <img src="lib/team/naina.jpeg" alt="Member 1">
-                    <h2>Naina Lal Mehta </h2>
-                    <center><hr></center>
-                    <p>Design Lead</p>
-                    <p class="slang">Turns ideas into visuals</p>
-                </div>
-            </div>
+      <!-- Shree Gattani -->
+      <div class="team-card" data-name="Shree Gattani" data-role="Technical Lead" data-slang="Codes and Stuff" data-dept="tech">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/shree.jpeg" alt="Shree Gattani" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Shree Gattani</h3>
+          <p class="team-role">Technical Lead</p>
+          <p class="team-slang-quote">"Codes and Stuff"</p>
+        </div>
+      </div>
 
-            <div class="card-container">
-                <div class="cards">
-                    <img src="lib/team/mirambika.jpeg" alt="Member 1">
-                    <h2>Mirambika Patel</h2>
-                    <center><hr></center>
-                    <p>Content Lead</p>
-                    <p class="slang">The Dictionary for the Club</p>
-                </div>
-                <div class="cards">
-                    <img src="lib/team/shreeym.jpeg" alt="Member 1">
-                    <h2>Shreeym Sharma </h2>
-                    <center><hr></center>
-                    <p>Marketing Lead</p>
-                    <p class="slang">Probably Making Reels</p>
-                </div>
-                <div class="cards">
-                    <img src="lib/team/shivani.jpeg" alt="Member 1">
-                    <h2>Shivani </h2>
-                    <center><hr></center>
-                    <p>Marketing Lead</p>
-                    <p class="slang">Probably Making Reels</p>
-                </div>
-            </div>
-            <div class="card-container">
-                <div class="cards">
-                    <img src="lib/team/parishi.jpeg" alt="Member 1">
-                    <h2>Parishi Garg</h2>
-                    <center><hr></center>
-                    <p>Event Management Lead</p>
-                    <p class="slang">Girly Pop Ideas Only</p>
-                </div>
+      <!-- Naina Lal Mehta -->
+      <div class="team-card" data-name="Naina Lal Mehta" data-role="Design Lead" data-slang="Turns ideas into visuals" data-dept="tech">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/naina.jpeg" alt="Naina Lal Mehta" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Naina Lal Mehta</h3>
+          <p class="team-role">Design Lead</p>
+          <p class="team-slang-quote">"Turns ideas into visuals"</p>
+        </div>
+      </div>
 
-                <div class="cards">
-                    <img src="lib/team/anya.jpeg" alt="Member 1">
-                    <h2>Anya Maheshwari</h2>
-                    <center><hr></center>
-                    <p>Event Management Lead</p>
-                    <p class="slang">Girly Pop Ideas Only</p>
-                </div>
-            </div>
+      <!-- Mirambika Patel -->
+      <div class="team-card" data-name="Mirambika Patel" data-role="Content Lead" data-slang="The Dictionary for the Club" data-dept="ops">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/mirambika.jpeg" alt="Mirambika Patel" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Mirambika Patel</h3>
+          <p class="team-role">Content Lead</p>
+          <p class="team-slang-quote">"The Dictionary for the Club"</p>
+        </div>
+      </div>
 
-            </div>
-        
-        <script src="index.js"></script>
-    </body>
+      <!-- Shreeym Sharma -->
+      <div class="team-card" data-name="Shreeym Sharma" data-role="Marketing Lead" data-slang="Probably Making Reels" data-dept="ops">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/shreeym.jpeg" alt="Shreeym Sharma" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Shreeym Sharma</h3>
+          <p class="team-role">Marketing Lead</p>
+          <p class="team-slang-quote">"Probably Making Reels"</p>
+        </div>
+      </div>
+
+      <!-- Shivani -->
+      <div class="team-card" data-name="Shivani" data-role="Marketing Lead" data-slang="Probably Making Reels" data-dept="ops">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/shivani.jpeg" alt="Shivani" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Shivani</h3>
+          <p class="team-role">Marketing Lead</p>
+          <p class="team-slang-quote">"Probably Making Reels"</p>
+        </div>
+      </div>
+
+      <!-- Parishi Garg -->
+      <div class="team-card" data-name="Parishi Garg" data-role="Event Management Lead" data-slang="Girly Pop Ideas Only" data-dept="ops">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/parishi.jpeg" alt="Parishi Garg" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Parishi Garg</h3>
+          <p class="team-role">Event Management Lead</p>
+          <p class="team-slang-quote">"Girly Pop Ideas Only"</p>
+        </div>
+      </div>
+
+      <!-- Anya Maheshwari -->
+      <div class="team-card" data-name="Anya Maheshwari" data-role="Event Management Lead" data-slang="Girly Pop Ideas Only" data-dept="ops">
+        <div class="team-img-wrap">
+          <span class="team-status-chip"><span class="dot"></span> ONLINE</span>
+          <img src="lib/team/anya.jpeg" alt="Anya Maheshwari" class="team-img" />
+        </div>
+        <div class="team-info-body">
+          <h3 class="team-name">Anya Maheshwari</h3>
+          <p class="team-role">Event Management Lead</p>
+          <p class="team-slang-quote">"Girly Pop Ideas Only"</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 60px;">
+      <a href="index.html" class="btn-hero-primary">← RETURN TO SYSTEM ROOT</a>
+    </div>
+  </main>
+
+  <!-- LIGHTBOX & PROFILE OVERLAY MODAL -->
+  <div id="modal-overlay-backdrop" class="modal-overlay-backdrop">
+    <div class="modal-window-box">
+      <div class="modal-window-header">
+        <div class="window-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <span id="modal-window-title" class="modal-window-title">OPERATOR_PROFILE</span>
+        <button id="modal-close-btn" class="modal-close-btn">✕</button>
+      </div>
+      <div id="modal-window-content" class="modal-window-content"></div>
+    </div>
+  </div>
+
+  <footer class="sys-footer" style="margin-top: 80px;">
+    <div class="footer-bottom-row" style="border: none;">
+      <span>&copy; 2025–2026 ACM-W SNIoE Chapter.</span>
+      <a href="index.html" style="color: var(--blue-light);">ACM-W.EXE ROOT</a>
+    </div>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
 </html>

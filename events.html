@@ -1,612 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ACM-W Events Details</title>
-    <meta name="description" content="Detailed Events Description - ACM-W" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACM-W SNIOE</title>
+  <meta name="description" content="Official Event Posters, Hackathons, Workshops, and Keynotes by ACM-W Shiv Nadar University Chapter." />
+  <meta name="theme-color" content="#09050e" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="lib/logo.png" />
 </head>
 <body>
-    <!--NAVBAR-->
-    <div class="navbar">
-        <img src="lib/logo.png" alt="ACM-W Logo" class="logo" />
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#About">About</a>
-            <a href="#">Events</a>
-            <a href="team.html">Team</a>
-            <a href="index.html#footer">Contact</a>
-        </div>
-        <button class="sm-btn" onclick="window.location.href='https://www.linkedin.com/company/acm-w-shiv-nadar-institution-of-eminence-chapter/'">
-  Explore
-</button>
 
+  <!-- SCANLINES & RETRO NOISE OVERLAY -->
+  <div class="scanlines-overlay" aria-hidden="true"></div>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true"></div>
+  <div id="custom-cursor-follower" class="custom-cursor-follower" aria-hidden="true"></div>
 
-        <!-- Hamburger Icon -->
-        <div class="hamburger" onclick="toggleMenu()">
-            &#9776;
-        </div>
+  <!-- NAVIGATION DOCK -->
+  <header class="sys-navbar-container">
+    <nav class="sys-navbar" aria-label="System Navigation">
+      <a href="index.html" class="nav-brand">
+        <img src="lib/logo.png" alt="ACM-W SNIoE Logo" class="nav-logo-icon" />
+      </a>
 
-        <!-- Side Navigation (hidden on desktop) -->
-        <div id="side-nav" class="side-nav">
-            <a href="javascript:void(0)" onclick="closeMenu()" class="close-btn">&times;</a>
-            <a href="index.html">Home</a>
-            <a href="index.html#About">About</a>
-            <a href="events.html" onclick="closeMenu()">Events</a>
-            <a href="team.html">Team</a>
-            <a href="index.html#footer">Contact</a>
-        </div>
+      <div class="nav-right-group">
+        <ul class="nav-links-wrap">
+          <li class="nav-link-item"><a href="index.html#home">Home</a></li>
+          <li class="nav-link-item"><a href="index.html#about">About</a></li>
+          <li class="nav-link-item active"><a href="events.html">Events</a></li>
+          <li class="nav-link-item"><a href="team.html">Team</a></li>
+          <li class="nav-link-item"><a href="index.html#scrapbook">Gallery</a></li>
+          <li class="nav-link-item"><a href="index.html#footer">Contact</a></li>
+        </ul>
 
-        <!-- Overlay -->
-        <div id="overlay" class="overlay" onclick="closeMenu()"></div>
+        <button class="cmd-k-trigger" aria-label="Open Command Palette">
+          <span>Search</span>
+        </button>
+      </div>
+
+      <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Menu">☰</button>
+    </nav>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer">
+    <div class="mobile-drawer-header">
+      <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--cyber-cyan); font-weight: 700;">ACM-W SNU</span>
+      <button id="btn-close-drawer" style="color: #fff; font-size: 1.4rem;">✕</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="index.html#scrapbook">Gallery</a></li>
+      <li><a href="index.html#footer">Contact</a></li>
+    </ul>
+    <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(0, 140, 255, 0.15);">
+      <button class="cmd-k-trigger" style="width: 100%; justify-content: center; padding: 12px;" aria-label="Open Search">
+        <span>🔍 Search Console</span>
+      </button>
+    </div>
+  </div>
+  <div id="drawer-overlay" class="drawer-overlay"></div>
+
+  <!-- COMMAND PALETTE MODAL -->
+  <div id="cmd-palette-backdrop" class="cmd-palette-backdrop">
+    <div class="cmd-palette-box">
+      <div class="cmd-search-input-wrap">
+        <span class="cmd-prompt-icon">></span>
+        <input type="text" id="cmd-search-input" class="cmd-search-input" placeholder="Search events, workshops, hackathons..." autocomplete="off" />
+      </div>
+      <ul id="cmd-results-list" class="cmd-results-list"></ul>
+      <div class="cmd-palette-footer">
+        <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate</span>
+        <span>Press <kbd>↵</kbd> to select</span>
+        <span><kbd>ESC</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="section-wrap" style="padding-top: 140px;">
+    <div style="margin-bottom: 30px;">
+      <span class="section-meta-tag">EXECUTABLE DIRECTORY // EVENTS.LOG</span>
+      <h1 class="section-title">
+        <span class="highlight-blue">EVENTS</span>
+      </h1>
+      <p class="section-subtitle">
+        Explore all verified hackathons, coding jams, summits, and speaker sessions conducted by ACM-W SNIoE.
+      </p>
     </div>
 
-    <!-- EVENTS SECTION -->
-    <div class="events-details container mt-5 mb-5">
-        
-        <!--ACHIEVEMENTS-->
-        <div class="event-section">
-            <h2 class="event-section-header">CLUB ACHIEVEMENTS</h2>
-            <div class="row mb-5">
-
-                <!-- Best Emerging Women Chapter -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_emerging_chapter" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/best_emerging_chapter.png" class="d-block w-100" alt="Best Emerging Women Chapter" />
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="eventTitle">Best Emerging Women Chapter in Region 2</h2>
-                    <p class="eventDescription">
-                        We achieved a significant milestone at the Regional Summit by being recognized as the Best Emerging Women Chapter in Region 2. India is divided into five regions under ACM-W, and this recognition highlights our chapter’s impactful initiatives, consistent efforts, and growing presence within the community.
-                    </p>
-                </div>
-
-                <!-- Consistent Society Award -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_consistent_society" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/consistent_society_award.png" class="d-block w-100" alt="Consistent Society Award" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/consistent_society_pic.jpeg" class="d-block w-100" alt="Consistent Society Celebration" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel_consistent_society" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel_consistent_society" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Most Consistent Society of the Year</h2>
-                    <p class="eventDescription">
-                        Recognized as the Most Consistent Society of the Year! Among 60+ clubs and societies at Shiv Nadar Institution of Eminence, this recognition reflects a year of consistent effort, impactful events, and strong collaboration across all our initiatives.
-                    </p>
-                </div>
-
-                <!-- Top Technical Society -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel1" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/image 4.png" class="d-block w-100" alt="Club Winner" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/clubWinner.jpg" class="d-block w-100" alt="Club Winner Trophy" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/clubwinner2.jpg" class="d-block w-100" alt="Club Winner Team" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Top Technical Society 2024-25</h2>
-                    <p class="eventDescription">
-                       ACM-W was honored with the Top Technical Society award at Club Wars 2024–25, hosted by Shiv Nadar Institution of Eminence. The award recognized our core team’s dedication, innovation, and consistent efforts throughout the year.
-                    </p>
-                </div>
-                
-            </div>
-        </div>
-
-        <!--HACKATHONS AND CODING JAMS-->
-        <div class="event-section">
-            <h2 class="event-section-header">HACKATHONS AND CODING JAMS</h2>
-            <div class="row mb-5">
-
-                <!-- LevelUp Buildathon -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_levelup" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/levelup_buildathon1.png" class="d-block w-100" alt="LevelUp Buildathon" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/levelup_buildathon2.jpeg" class="d-block w-100" alt="Buildathon Participants" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/levelup_buildathon3.png" class="d-block w-100" alt="Buildathon Poster" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/Buildathon1.jpg" class="d-block w-100" alt="Buildathon Event" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel_levelup" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel_levelup" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">LevelUp Buildathon</h2>
-                    <p class="eventDescription">
-                       An inter-college web development challenge open to external participants, aimed at encouraging women in tech. The event featured weekly full-stack development tasks and engaging workshops designed to enhance participants’ technical skills.
-                    </p>
-                </div>
-
-                <!-- CryptX Files -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_cryptx" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/cryptx_files1.png" class="d-block w-100" alt="CryptX Files" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/cryptx_files2.jpeg" class="d-block w-100" alt="CryptX Files Details" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel_cryptx" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel_cryptx" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">CryptX Files</h2>
-                    <p class="eventDescription">
-                        CryptX Files was a 34-hour inter-college online crypthunt with 150+ participants from across colleges. We designed and developed a custom website, with every puzzle and challenge created by our team. Participants solved interconnected puzzles involving cryptography, hidden clues, and digital investigation.
-                    </p>
-                </div>
-
-                <!-- Crypthunt -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_crypthunt" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/crypthunt1.png" class="d-block w-100" alt="Crypthunt Louvre Heist" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/crypthunt2.jpeg" class="d-block w-100" alt="Crypthunt Event" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/crypthunt3.jpeg" class="d-block w-100" alt="Crypthunt Team" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/crypthunt4.jpeg" class="d-block w-100" alt="Crypthunt Participants" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel_crypthunt" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel_crypthunt" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Crypthunt: Louvre Heist</h2>
-                    <p class="eventDescription">
-                        On 29 October 2025, ACM-W organized a Louvre Heist–themed crypt hunt that challenged participants with creative puzzles and decoding tasks, attracting 60+ enthusiastic participants.
-                    </p>
-                </div>
-
-                <!-- Reverse Coding Contest -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_reverse_coding" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/reverse_coding1.png" class="d-block w-100" alt="Reverse Coding Contest" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/reverse_coding2.jpeg" class="d-block w-100" alt="Reverse Coding Contest Details" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel_reverse_coding" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel_reverse_coding" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Reverse Coding Contest</h2>
-                    <p class="eventDescription">
-                        Participants had to analyze given outputs to deduce the underlying code logic. Conducted in two competitive rounds, the event saw 50+ registrations and challenged participants to think critically and approach problems from a reverse-engineering perspective.
-                    </p>
-                </div>
-
-                <!-- Hackdata 2026 -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel3" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/hackdata_2026_3.png" class="d-block w-100" alt="HackData 2026" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/hackdata_2026_1.jpeg" class="d-block w-100" alt="HackData Highlights" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/hackdata_2026_2.png" class="d-block w-100" alt="HackData Event" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/hackdata1.jpg" class="d-block w-100" alt="Hackdata" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/hackdata2.JPG" class="d-block w-100" alt="Hackdata Team" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel3" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel3" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">HackData 2026 (ACM × ACM-W × GDG)</h2>
-                    <p class="eventDescription">
-                        HackData 2026 was a multi-event technical fest at Shiv Nadar University, featuring Code Duels, TriNetra CTF, and a 24-hour hackathon on “Shared Autonomy,” with participation from 150+ students across institutions.
-                    </p>
-                </div>
-
-                <!-- Envisage Hackathon -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel5" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/envisage.png" class="d-block w-100" alt="Envisage Hackathon" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/envisage2.jpg" class="d-block w-100" alt="Envisage Hackathon Group" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/envisage3.jpg" class="d-block w-100" alt="Envisage Presentations" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/envisage4.jpg" class="d-block w-100" alt="Envisage Awards" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel5" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel5" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Envisage Hackathon</h2>
-                    <p class="eventDescription">
-                        Envisage was a 24-hour intra-college hackathon that brought together over 150 participants, all ready to code, create, and compete. With a prize pool of ₹60,000, the event was all about innovation, teamwork, and solving real-world problems.
-                    </p>
-                </div>
-
-                <!-- Coding Jams -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel6" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/codejam.png" class="d-block w-100" alt="Coding Jams" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/codingjams2.jpg" class="d-block w-100" alt="Coding Jams Session" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/codingjams3.jpg" class="d-block w-100" alt="Coding Jams Winners" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel6" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel6" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Coding Jams</h2>
-                    <p class="eventDescription">
-                        Coding Jams was an online DSA series curated to help students strengthen their problem-solving skills. Led by our tech lead, each session focused on core data structures and algorithms essential for mastering DSA.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!--WORKSHOPS-->
-        <div class="event-section">
-            <h2 class="event-section-header">WORKSHOPS</h2>
-            <div class="row mb-5">
-                
-                <!-- Cyber + AI Safety NGO Workshop -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_ngo_workshop" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/ngo_workshop.jpg" class="d-block w-100" alt="Cyber and AI Safety Workshop" />
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="eventTitle">Cyber + AI Safety Workshop: Think Before You Click</h2>
-                    <p class="eventDescription">
-                        We hosted a Cyber + AI Safety workshop for our 9th and 10th grade students. Through an interactive presentation, "Think Before You Click", students learned to spot scams, protect their passwords, and recognize AI-generated content. The session wrapped up with a hands-on activity where every student built and personalized their own webpage showcasing their creative digital skills.
-                    </p>
-                </div>
-
-                <!-- Game Development Workshop -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel10" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/gamedev1.jpg" class="d-block w-100" alt="Game Dev Workshop" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/gamedev2.jpg" class="d-block w-100" alt="Game Dev Coding" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/gamedev3.jpg" class="d-block w-100" alt="Game Dev Demo" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel10" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel10" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Game Development Workshop</h2>
-                    <p class="eventDescription">
-                        On 21st October 2024, ACM-W and Nexus teamed up to host a fun and interactive Game Development Workshop. Participants were guided on how to use PyCharm as an IDE for game development, focusing on creating a two-player game.
-                    </p>
-                </div>
-
-                <!-- Git & Github Workshop -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel11" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/github1.jpg" class="d-block w-100" alt="Git & Github Workshop" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/github2.jpg" class="d-block w-100" alt="Git & Github Practice" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/github3.jpg" class="d-block w-100" alt="Git & Github Group" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel11" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel11" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Git & Github Workshop</h2>
-                    <p class="eventDescription">
-                        ACM-W and ACM hosted a hands-on Git & GitHub workshop on March 21st, 2024. Participants explored version control fundamentals through interactive activities, live practice, and real-world workflows.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!--SPEAKER EVENTS-->
-        <div class="event-section">
-            <h2 class="event-section-header">SPEAKER EVENTS</h2>
-            <div class="row mb-5">
-
-                <div class="col-md-6 mb-4">
-                    <div id="carousel7" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/expertInsights1.jpg" class="d-block w-100" alt="Expert Insights" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/expertInsights2.jpg" class="d-block w-100" alt="Expert Insights Speaker" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel7" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel7" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Expert Insights</h2>
-                    <p class="eventDescription">
-                       On 23rd May 2025, ACM-W hosted Mr. Sunil Kumar for a powerful session on navigating the journey from campus to global conferences, sharing practical advice on growth, leadership, and digital accessibility.
-                    </p>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <div id="carousel8" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/unfiltered1.jpg" class="d-block w-100" alt="Unfiltered Session" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/unfiltered2.jpg" class="d-block w-100" alt="Unfiltered Speakers" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/unfiltered3.jpg" class="d-block w-100" alt="Unfiltered Audience" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel8" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel8" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Unfiltered</h2>
-                    <p class="eventDescription">
-                        ACM-W and GDSC hosted Unfiltered featuring Tanishka Yagneshwar (GSoC '24) and Urvi Gupta (Microsoft '25), sharing honest insights into preparing for tech roles, interview processes, and career growth.
-                    </p>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <div id="carousel9" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/speakersession1.png" class="d-block w-100" alt="Speaker Series" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/Speakersession2.png" class="d-block w-100" alt="Speaker Series 2" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/speakersession3.jpg" class="d-block w-100" alt="Speaker Series 3" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel9" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel9" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">Speaker Series: Dell SDEs</h2>
-                    <p class="eventDescription">
-                        ACM-W hosted Devina Bhatnagar and Vansh Maheshwari, SDE interns at Dell, who shared their internship journey, interview experiences, and tips on preparing for software engineering roles.
-                    </p>
-                </div>
-
-            </div>
-        </div>
-
-        <!--NETWORKING EVENTS-->
-        <div class="event-section">
-            <h2 class="event-section-header">NETWORKING EVENTS</h2>
-            <div class="row mb-5">
-
-                <!-- ACM India Chapter Summit 2025 -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel_summit_2025" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/acm_summit_2025.jpeg" class="d-block w-100" alt="ACM India Chapter Summit 2025" />
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="eventTitle">ACM India Chapter Summit 2025</h2>
-                    <p class="eventDescription">
-                        We represented our university at the ACM India Chapter Summit 2025 at NMIMS Indore, themed “The Human-AI Partnership.” Our Chairperson, Charvi, along with other core members and faculty, represented the chapter.
-                    </p>
-                </div>
-
-                <!-- ACM India Chapter Summit 2024 -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel12" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/acmSummit.jpg" class="d-block w-100" alt="ACM India Chapter Summit 2024" />
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="eventTitle">ACM India Chapter Summit 2024</h2>
-                    <p class="eventDescription">
-                        Held on 20–21 December 2024 at BMSCE and RVCE, the summit brought together ACM chapters from across India to explore Sustainable AI, Responsible Tech, and innovation.
-                    </p>
-                </div>
-
-                <!-- CSE Department Mixer -->
-                <div class="col-md-6 mb-4">
-                    <div id="carousel13" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="lib/mixer1.jpg" class="d-block w-100" alt="CSE Department Mixer" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="lib/mixer2.jpg" class="d-block w-100" alt="Mixer Gathering" />
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel13" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel13" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                    <h2 class="eventTitle">CSE Department Mixer</h2>
-                    <p class="eventDescription">
-                         The CSE Department Mixer was a fun kickoff for the freshman CSE batch with tech demos, coding showcases, and networking to help students connect and feel at home.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center mt-5">
-            <a href="index.html" class="btn btn-primary">Back to Home</a>
-        </div>
+    <!-- FILTER TABS -->
+    <div class="events-filter-bar" style="margin-bottom: 40px;">
+      <button class="event-filter-btn active" data-filter="all">All Records</button>
+      <button class="event-filter-btn" data-filter="hack">Hackathons & Hunts</button>
+      <button class="event-filter-btn" data-filter="workshop">Workshops</button>
+      <button class="event-filter-btn" data-filter="speaker">Speaker Series</button>
+      <button class="event-filter-btn" data-filter="summit">Summits & Mixers</button>
     </div>
 
-    
+    <!-- POSTERS GRID -->
+    <div class="events-posters-grid">
+      <!-- LevelUp Buildathon -->
+      <div class="event-poster-card" data-category="hack">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">HACKATHON</span>
+          <img src="lib/levelup_buildathon1.png" alt="LevelUp Buildathon" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">LevelUp Buildathon</h3>
+          <p class="poster-desc">
+            An inter-college web development challenge open to external participants, aimed at encouraging women in tech with weekly full-stack tasks and mentorship sprints.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue-light);">INTER-COLLEGE SPRINT</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            function updateEventText(carouselId, index) {
-                const eventTitle = document.querySelector(`#eventText${carouselId} .eventTitle`);
-                const eventDescription = document.querySelector(`#eventText${carouselId} .eventDescription`);
-                if (eventTitle && eventDescription) {
-                    eventTitle.textContent = eventData[carouselId][index].title;
-                    eventDescription.textContent = eventData[carouselId][index].description;
-                }
-            }
-        });
+      <!-- CryptX Files -->
+      <div class="event-poster-card" data-category="hack">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">CRYPTHUNT</span>
+          <img src="lib/cryptx_files1.png" alt="CryptX Files" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">CryptX Files</h3>
+          <p class="poster-desc">
+            CryptX Files was a 34-hour inter-college online crypthunt with 150+ participants from across universities. Every single puzzle was custom-designed by our core engineering team.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--cyber-cyan);">150+ PARTICIPANTS</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HackData 2026 -->
+      <div class="event-poster-card" data-category="hack">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">MEGA-FEST</span>
+          <img src="lib/hackdata_2026_3.png" alt="HackData 2026" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">HackData 2026 (ACM × ACM-W × GDG)</h3>
+          <p class="poster-desc">
+            Flagship technical fest featuring Code Duels, TriNetra CTF, and a 24-hour hackathon themed on Shared Autonomy, bringing together 150+ students across universities.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--terminal-green);">24H HACKATHON</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Envisage Hackathon -->
+      <div class="event-poster-card" data-category="hack">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">HACKATHON</span>
+          <img src="lib/envisage.png" alt="Envisage Hackathon" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Envisage Hackathon</h3>
+          <p class="poster-desc">
+            24-hour intra-college hackathon that brought together over 150 participants with a prize pool of ₹60,000, creating solutions for real-world sustainability and technology challenges.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--warn-amber);">₹60,000 PRIZE POOL</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crypthunt Louvre Heist -->
+      <div class="event-poster-card" data-category="hack">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">CRYPTHUNT</span>
+          <img src="lib/crypthunt1.png" alt="Crypthunt Louvre Heist" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Crypthunt: Louvre Heist</h3>
+          <p class="poster-desc">
+            A high-energy heist-themed treasure and cryptography hunt that challenged participants with creative multi-tier decoding tasks, attracting 60+ enthusiastic participants.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue-light);">HEIST EDITION</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reverse Coding Contest -->
+      <div class="event-poster-card" data-category="hack">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">CONTEST</span>
+          <img src="lib/reverse_coding1.png" alt="Reverse Coding Contest" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Reverse Coding Contest</h3>
+          <p class="poster-desc">
+            Two competitive rounds where participants analyzed given outputs to reverse-engineer underlying logic and algorithms with 50+ registered coders.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--cyber-cyan);">CRITICAL LOGIC</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cyber + AI Safety NGO Workshop -->
+      <div class="event-poster-card" data-category="workshop">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">OUTREACH</span>
+          <img src="lib/ngo_workshop.jpg" alt="Cyber and AI Safety Workshop" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Cyber & AI Safety: Think Before You Click</h3>
+          <p class="poster-desc">
+            Hosted for 9th and 10th-grade students teaching threat analysis, scam prevention, AI image literacy, and concluded with a hands-on session where students built their own personal webpages.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--terminal-green);">COMMUNITY SPRINT</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Dev Workshop -->
+      <div class="event-poster-card" data-category="workshop">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">WORKSHOP</span>
+          <img src="lib/gamedev1.jpg" alt="Game Dev Workshop" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Game Development with PyCharm</h3>
+          <p class="poster-desc">
+            ACM-W teamed up with Nexus for a hands-on PyCharm arcade workshop, guiding participants through building dynamic 2-player games from scratch.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--warn-amber);">PYCHARM × NEXUS</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Git & GitHub Workshop -->
+      <div class="event-poster-card" data-category="workshop">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">WORKSHOP</span>
+          <img src="lib/github1.jpg" alt="Git and GitHub Workshop" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Git & GitHub Hands-on Mastery</h3>
+          <p class="poster-desc">
+            Collaborative version control fundamentals, branch management, merge conflict resolution, and open-source contribution practices with ACM.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--cyber-cyan);">VERSION CONTROL</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coding Jams DSA Series -->
+      <div class="event-poster-card" data-category="workshop">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">SERIES</span>
+          <img src="lib/codejam.png" alt="Coding Jams" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Coding Jams DSA Series</h3>
+          <p class="poster-desc">
+            Online competitive programming and data structures series curated by our tech lead to master core algorithms and technical interviews.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue-light);">DSA MASTERY</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speaker Series: Dell SDEs -->
+      <div class="event-poster-card" data-category="speaker">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">KEYNOTE</span>
+          <img src="lib/speakersession1.png" alt="Speaker Series Dell SDEs" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Speaker Series: Dell SDE Insights</h3>
+          <p class="poster-desc">
+            Devina Bhatnagar and Vansh Maheshwari, SDE interns at Dell, shared their roadmap on preparing for top software engineering roles and internship rounds.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--warn-amber);">DELL SDE</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unfiltered Panel -->
+      <div class="event-poster-card" data-category="speaker">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">PANEL</span>
+          <img src="lib/unfiltered1.jpg" alt="Unfiltered Panel" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Unfiltered: Tech Career Panel</h3>
+          <p class="poster-desc">
+            Honest career panel featuring Tanishka Yagneshwar (GSoC '24) and Urvi Gupta (Microsoft '25) on navigating international fellowships and big tech interviews.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue-light);">GSOC × MICROSOFT</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expert Insights Sunil Kumar -->
+      <div class="event-poster-card" data-category="speaker">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">KEYNOTE</span>
+          <img src="lib/expertInsights1.jpg" alt="Expert Insights" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">Expert Insights with Sunil Kumar</h3>
+          <p class="poster-desc">
+            Navigating the journey from campus to global conferences, digital accessibility, leadership development, and technical public speaking.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--terminal-green);">GLOBAL KEYNOTE</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACM India Chapter Summit 2025 -->
+      <div class="event-poster-card" data-category="summit">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">SUMMIT</span>
+          <img src="lib/acm_summit_2025.jpeg" alt="ACM Summit 2025" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">ACM India Chapter Summit 2025 (NMIMS Indore)</h3>
+          <p class="poster-desc">
+            Represented Shiv Nadar University at the national summit themed “The Human-AI Partnership,” exchanging initiatives with ACM chapters across India.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--cyber-cyan);">NATIONAL DELEGATION</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSE Department Mixer -->
+      <div class="event-poster-card" data-category="summit">
+        <div class="poster-preview-wrap">
+          <span class="poster-category-tag">MIXER</span>
+          <img src="lib/mixer1.jpg" alt="CSE Mixer" class="poster-img" />
+        </div>
+        <div class="poster-content-body">
+          <h3 class="poster-title">CSE Department Mixer</h3>
+          <p class="poster-desc">
+            Welcome orientation and tech showcase for freshman CSE students featuring interactive coding games, mentorship, and community onboarding.
+          </p>
+          <div class="poster-footer-row">
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--blue-light);">FRESHMAN WELCOME</span>
+            <span class="poster-btn-inspect">EXPLORE POSTER →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 60px;">
+      <a href="index.html" class="btn-hero-primary">← RETURN TO SYSTEM ROOT</a>
+    </div>
+  </main>
+
+  <!-- LIGHTBOX & PROFILE OVERLAY MODAL -->
+  <div id="modal-overlay-backdrop" class="modal-overlay-backdrop">
+    <div class="modal-window-box">
+      <div class="modal-window-header">
+        <div class="window-dots">
+          <span class="dot dot-red"></span>
+          <span class="dot dot-yellow"></span>
+          <span class="dot dot-green"></span>
+        </div>
+        <span id="modal-window-title" class="modal-window-title">EVENT_POSTER_INSPECTOR</span>
+        <button id="modal-close-btn" class="modal-close-btn">✕</button>
+      </div>
+      <div id="modal-window-content" class="modal-window-content"></div>
+    </div>
+  </div>
+
+  <footer class="sys-footer" style="margin-top: 80px;">
+    <div class="footer-bottom-row" style="border: none;">
+      <span>&copy; 2025–2026 ACM-W SNIoE Chapter.</span>
+      <a href="index.html" style="color: var(--blue-light);">ACM-W.EXE ROOT</a>
+    </div>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>
