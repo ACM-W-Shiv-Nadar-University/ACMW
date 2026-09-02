@@ -339,19 +339,29 @@ button {
 
 .sys-navbar {
   pointer-events: auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+
   width: 100%;
   max-width: 1140px;
+
   padding: 8px 18px 8px 24px;
+
   background: rgba(3, 9, 22, 0.65);
   backdrop-filter: blur(28px) saturate(190%);
   -webkit-backdrop-filter: blur(28px) saturate(190%);
+
   border: none;
   border-radius: var(--radius-pill);
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 140, 255, 0.08);
-  transition: background 0.3s var(--ease-smooth), box-shadow 0.3s;
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(0, 140, 255, 0.08);
+
+  transition:
+    background 0.3s var(--ease-smooth),
+    box-shadow 0.3s;
 }
 
 .sys-navbar:hover {
@@ -367,13 +377,18 @@ button {
 }
 
 .nav-links-wrap {
+  grid-column: 2;
+
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
+
   list-style: none;
   background: transparent;
   padding: 0;
   border: none;
+  margin: 0;
 }
 
 .nav-link-item a {
@@ -397,17 +412,23 @@ button {
 }
 
 .cmd-k-trigger {
+  grid-column: 3;
+  justify-self: end;
+
   display: flex;
   align-items: center;
   gap: 6px;
+
   padding: 7px 16px;
   background: rgba(0, 140, 255, 0.1);
   border: none;
   border-radius: var(--radius-pill);
+
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--blue-light);
+
   transition: all 0.2s;
 }
 
@@ -420,6 +441,7 @@ button {
 .nav-brand {
   display: flex;
   align-items: center;
+  justify-self: start;
   text-decoration: none;
 }
 
@@ -764,8 +786,8 @@ button {
   padding-bottom: 72px;
   padding-top: 100px;
   background-image: 
-    radial-gradient(circle at 50% 50%, rgba(2, 5, 13, 0) 0%, rgba(2, 5, 13, 0.25) 70%, #02050D 100%),
-    url('lib/hero_bg.jpg');
+    /*radial-gradient(circle at 50% 50%, rgba(2, 5, 13, 0) 0%, rgba(2, 5, 13, 0.25) 70%, #02050D 100%),*/
+    url('lib/newbg.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1731,8 +1753,8 @@ button {
 @media screen and (max-width: 1024px) {
   .nav-left-group,
   .nav-right-group {
-    display: none;
-  }
+  display: contents;
+}
   .mobile-menu-btn {
     display: flex;
     align-items: center;
