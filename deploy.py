@@ -9,15 +9,35 @@ import http.cookiejar
 import urllib.request
 import urllib.parse
 
-HOST = "acmwsnu.hosting.acm.org"
-PORT = 2083
-USER = "acmwsnuhosting"
-PASS = "8*PT%d0mSuk91c!&SwwUk#"
-REMOTE_ROOT = "public_html"
 LOCAL_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+# Load local .env file if present
+env_file = os.path.join(LOCAL_ROOT, ".env")
+if os.path.exists(env_file):
+    with open(env_file, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
+
+HOST = os.environ.get("CPANEL_HOST", "acmwsnu.hosting.acm.org")
+PORT = int(os.environ.get("CPANEL_PORT", 2083))
+USER = os.environ.get("CPANEL_USER", "")
+PASS = os.environ.get("CPANEL_PASS", "")
+REMOTE_ROOT = os.environ.get("CPANEL_REMOTE_ROOT", "public_html")
+
+if not USER or not PASS:
+    import sys
+    print("❌ Error: Deployment credentials missing!")
+    print("Please create a .env file (excluded from git) with:")
+    print("  CPANEL_USER=your_user")
+    print("  CPANEL_PASS=your_password")
+    print("Or export CPANEL_USER and CPANEL_PASS environment variables.")
+    sys.exit(1)
+
 EXCLUDE_DIRS = {".git", ".idea", ".vscode", "node_modules", "scratch"}
-EXCLUDE_FILES = {".DS_Store", "deploy.py", "package-lock.json", "deploy_bundle.zip"}
+EXCLUDE_FILES = {".DS_Store", "deploy.py", "package-lock.json", "deploy_bundle.zip", ".env"}
 
 
 def get_session():
@@ -44,28 +64,44 @@ def get_session():
 
 
 def get_target_files():
-    # Primary web files that drive the application
-    core_files = ["index.html", "events.html", "team.html", "style.css", "index.js", "team.css", "CNAME"]
+    targets = set()
     
-    # Get modified/added files from git
-    try:
-        git_cmd = ["git", "diff", "--name-only", "HEAD~1", "HEAD"]
-        out = subprocess.check_output(git_cmd, cwd=LOCAL_ROOT).decode().strip().split("\n")
-        git_files = [f.strip() for f in out if f.strip() and not f.strip().endswith("deploy.py")]
-    except Exception:
-        git_files = []
+    # 1. All root-level web files
+    for f in os.listdir(LOCAL_ROOT):
+        full_p = os.path.join(LOCAL_ROOT, f)
+        if os.path.isfile(full_p):
+            if f.endswith((".html", ".css", ".js", ".json")) or f == "CNAME":
+                if f not in EXCLUDE_FILES:
+                    targets.add(f)
 
-    # Combined set of files
-    all_targets = set(core_files + git_files)
-    
-    # Ensure all new lib files are included
+    # 2. Files changed across recent git commits (up to 10 back)
+    try:
+        git_cmd = ["git", "diff", "--name-only", "HEAD~10", "HEAD"]
+        out = subprocess.check_output(git_cmd, cwd=LOCAL_ROOT).decode().strip().split("\n")
+        for f in out:
+            f = f.strip()
+            if f and not f.endswith("deploy.py") and not f.startswith("."):
+                targets.add(f)
+    except Exception:
+        pass
+
+    # 3. Include all lib assets that were created or modified
     for root, dirs, files in os.walk(os.path.join(LOCAL_ROOT, "lib")):
         for f in files:
-            rel = os.path.relpath(os.path.join(root, f), LOCAL_ROOT)
-            if "hero_bg" in f or "bg-pattern" in f:
-                all_targets.add(rel)
+            if not f.startswith("."):
+                rel = os.path.relpath(os.path.join(root, f), LOCAL_ROOT)
+                # If it's a known background/newly added asset
+                if any(k in f for k in ["hero_bg", "bg-pattern", "newbg", "levelup_buildathon"]):
+                    targets.add(rel)
 
-    return sorted(list(all_targets))
+    # Filter out hidden or excluded files
+    filtered = [
+        t for t in targets
+        if not os.path.basename(t).startswith(".")
+        and os.path.basename(t) not in EXCLUDE_FILES
+        and not any(part in EXCLUDE_DIRS for part in t.split(os.sep))
+    ]
+    return sorted(filtered)
 
 
 def create_zip_bundle(zip_path):
@@ -143,23 +179,26 @@ def delete_remote_file(opener, sec_token, remote_dir, filename):
 
 
 def deploy():
-    zip_path = os.path.join(LOCAL_ROOT, "deploy_bundle.zip")
-    try:
-        create_zip_bundle(zip_path)
-        print(f"Connecting to {HOST}:{PORT} via cPanel...")
-        opener, sec_token = get_session()
-        print(f"Logged in successfully! Token: {sec_token}\n")
+    target_files = get_target_files()
+    print(f"Connecting to {HOST}:{PORT} via cPanel...")
+    opener, sec_token = get_session()
+    print(f"Logged in successfully! Token: {sec_token}\n")
 
-        upload_file(opener, sec_token, zip_path, REMOTE_ROOT)
-        extract_remote_zip(opener, sec_token, REMOTE_ROOT, "deploy_bundle.zip")
-        delete_remote_file(opener, sec_token, REMOTE_ROOT, "deploy_bundle.zip")
-        print("\n=======================================================")
-        print(f"🎉 WEBSITE DEPLOYED TO PRODUCTION SUCCESSFULLY!")
-        print(f"   URL: https://{HOST}/")
-        print("=======================================================")
-    finally:
-        if os.path.exists(zip_path):
-            os.remove(zip_path)
+    print(f"Deploying {len(target_files)} target files...")
+    for rel_path in target_files:
+        local_path = os.path.join(LOCAL_ROOT, rel_path)
+        if not os.path.exists(local_path) or not os.path.isfile(local_path):
+            continue
+
+        rel_dir = os.path.dirname(rel_path)
+        remote_dir = f"{REMOTE_ROOT}/{rel_dir}".rstrip("/") if rel_dir else REMOTE_ROOT
+        upload_file(opener, sec_token, local_path, remote_dir)
+
+    print("\n=======================================================")
+    print(f"🎉 WEBSITE DEPLOYED TO PRODUCTION SUCCESSFULLY!")
+    print(f"   URL: https://{HOST}/")
+    print(f"   Custom Domain: https://acmwsnu.acm.org/")
+    print("=======================================================")
 
 
 if __name__ == "__main__":

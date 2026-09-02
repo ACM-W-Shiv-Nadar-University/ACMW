@@ -1,0 +1,15 @@
+# Environment secrets
+.env
+.env.*
+*.env
+
+# OS / Python files
+.DS_Store
+__pycache__/
+*.py[cod]
+*$py.class
+deploy_bundle.zip
+
+# IDEs
+.idea/
+.vscode/
