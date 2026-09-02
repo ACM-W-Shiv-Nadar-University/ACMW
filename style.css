@@ -339,10 +339,9 @@ button {
 
 .sys-navbar {
   pointer-events: auto;
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   width: 100%;
   max-width: 1140px;
@@ -378,11 +377,8 @@ button {
 }
 
 .nav-links-wrap {
-  grid-column: 2;
-
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 4px;
 
   list-style: none;
@@ -413,13 +409,6 @@ button {
 }
 
 .cmd-k-trigger {
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  grid-column: 3;
-  justify-self: end;
-
   display: flex;
   align-items: center;
   gap: 6px;
@@ -444,13 +433,8 @@ button {
 }
 
 .nav-brand {
-  position: absolute;
-  left: 24px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  justify-self: start;
   text-decoration: none;
 }
 
@@ -2239,8 +2223,8 @@ button {
 @media screen and (max-width: 1024px) {
   .nav-left-group,
   .nav-right-group {
-  display: contents;
-}
+    display: none;
+  }
   .mobile-menu-btn {
     display: flex;
     align-items: center;
