@@ -132,7 +132,7 @@
     }
     renderFollower();
 
-    const clickables = document.querySelectorAll('a, button, input, .team-card, .trophy-card, .scrapbook-item, .event-poster-card');
+    const clickables = document.querySelectorAll('a, button, input, .trophy-card, .scrapbook-item, .event-poster-card');
     clickables.forEach((el) => {
       el.addEventListener('mouseenter', () => {
         document.body.classList.add('cursor-hover');
@@ -220,13 +220,13 @@
 
   // --- COMMAND PALETTE (CMD+K) ---
   const commandItems = [
-    { title: 'Home // System Root', section: '#home', tag: 'Navigation' },
-    { title: 'About // Mission Kernel', section: '#about', tag: 'Mission' },
-    { title: 'Team // Core Operators', section: '#team', tag: 'Roster' },
-    { title: 'Events // Poster Vault', section: '#events', tag: 'Events' },
-    { title: 'Gallery // Digital Scrapbook', section: '#scrapbook', tag: 'Gallery' },
-    { title: 'The Lab // Interactive Terminal', section: '#lab', tag: 'Terminal' },
-    { title: 'Contact // Communication Nodes', section: '#footer', tag: 'Contact' },
+    { title: 'Home • System Root', section: '#home', tag: 'Navigation' },
+    { title: 'About • Mission & Core', section: '#about', tag: 'Mission' },
+    { title: 'Team • Members & Leads', section: '#team', tag: 'Roster' },
+    { title: 'Events • Poster Vault', section: '#events', tag: 'Events' },
+    { title: 'Gallery • Digital Scrapbook', section: '#scrapbook', tag: 'Gallery' },
+    { title: 'The Lab • Interactive Terminal', section: '#lab', tag: 'Terminal' },
+    { title: 'Contact • Communication Nodes', section: '#footer', tag: 'Contact' },
     { title: 'Open Official Instagram', url: 'https://www.instagram.com/acmw.snu', tag: 'External' },
     { title: 'Open Official LinkedIn', url: 'https://www.linkedin.com/company/acm-w-shiv-nadar-institution-of-eminence-chapter/', tag: 'External' }
   ];
@@ -387,7 +387,7 @@
         const caption = item.querySelector('.scrapbook-caption');
         if (img) {
           openModal(
-            'MEMORY_VAULT // ' + (caption ? caption.textContent : 'CAMERA ROLL'),
+            'MEMORY VAULT: ' + (caption ? caption.textContent : 'CAMERA ROLL'),
             `<div style="text-align: center;">
               <img src="${img.src}" style="max-height: 65vh; margin: 0 auto 16px; border-radius: 8px; border: 1px solid var(--sys-border);" alt="Full View">
               <p style="font-family: var(--font-mono); color: var(--cyber-cyan); font-size: 0.9rem;">${caption ? caption.textContent : ''}</p>
@@ -415,7 +415,7 @@
         const badge = badgeEl ? badgeEl.textContent : '';
 
         openModal(
-          `EVENT_RECORD // ${title.toUpperCase()}`,
+          `EVENT RECORD: ${title.toUpperCase()}`,
           `<div class="modal-event-layout">
             <div style="background: #030814; border-radius: 10px; overflow: hidden; border: 1px solid var(--sys-border);">
               <img src="${imgSrc}" style="width: 100%; max-height: 60vh; object-fit: contain; display: block;" alt="${title}">
@@ -426,43 +426,8 @@
                 ${badge ? `<span style="font-family: var(--font-mono); font-size: 0.76rem; color: var(--blue-light); background: rgba(0,140,255,0.1); padding: 3px 8px; border-radius: 4px;">${badge}</span>` : ''}
               </div>
               <h2 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.25;">${title}</h2>
-              <p style="font-size: 0.96rem; color: var(--text-pearl); line-height: 1.7; margin-bottom: 20px;">
+              <p style="font-size: 0.96rem; color: var(--text-pearl); line-height: 1.7; margin-bottom: 0;">
                 ${desc}
-              </p>
-              <div style="background: rgba(0, 140, 255, 0.08); padding: 14px 18px; border-radius: 8px; border-left: 3px solid var(--cyber-cyan);">
-                <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--cyber-cyan);">
-                  ORGANIZED BY ACM-W SHIV NADAR UNIVERSITY CHAPTER
-                </p>
-              </div>
-            </div>
-          </div>`
-        );
-      });
-    });
-
-    // Team Card Inspector Modal
-    const teamCards = document.querySelectorAll('.team-card');
-    teamCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        const name = card.getAttribute('data-name');
-        const role = card.getAttribute('data-role');
-        const slang = card.getAttribute('data-slang');
-        const img = card.querySelector('img');
-        const imgSrc = img ? img.src : '';
-
-        openModal(
-          `OPERATOR // ${name ? name.toUpperCase() : 'PROFILE'}`,
-          `<div class="modal-team-layout">
-            <img src="${imgSrc}" style="width: 100%; border-radius: 12px; border: 1px solid var(--sys-border-glow);" alt="${name}">
-            <div>
-              <span class="team-status-chip" style="display: inline-flex; margin-bottom: 12px;"><span class="dot"></span> STATUS: ONLINE</span>
-              <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: #fff; margin-bottom: 6px;">${name}</h2>
-              <p style="font-family: var(--font-mono); color: var(--cyber-cyan); margin-bottom: 16px;">${role}</p>
-              <div style="background: rgba(0, 140, 255, 0.08); padding: 14px; border-radius: 8px; border-left: 3px solid var(--blue-electric); margin-bottom: 20px;">
-                <p style="font-size: 0.95rem; font-style: italic; color: var(--text-pearl);">"${slang}"</p>
-              </div>
-              <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
-                Core Member of ACM-W Shiv Nadar University Chapter, driving excellence and leadership in computing.
               </p>
             </div>
           </div>`
@@ -507,7 +472,15 @@
 
         teamCards.forEach((card) => {
           const dept = card.getAttribute('data-dept');
-          if (roleFilter === 'all' || dept === roleFilter) {
+          const tier = card.getAttribute('data-tier') || (dept === 'lead' ? 'core' : 'subcore');
+          if (
+            roleFilter === 'all' ||
+            dept === roleFilter ||
+            tier === roleFilter ||
+            (roleFilter === 'lead' && tier === 'core') ||
+            (roleFilter === 'core' && (tier === 'core' || dept === 'lead')) ||
+            (roleFilter === 'subcore' && tier === 'subcore')
+          ) {
             card.style.display = 'block';
           } else {
             card.style.display = 'none';
@@ -526,14 +499,12 @@
 
     const commands = {
       help: () => `Available subroutines:
-  - <span style="color: var(--cyber-cyan);">help</span>: Display system manual
-  - <span style="color: var(--cyber-cyan);">about</span>: Print ACM-W SNU mission & kernel specs
-  - <span style="color: var(--cyber-cyan);">team</span>: List all active system operators
-  - <span style="color: var(--cyber-cyan);">awards</span>: Print chapter accolades
-  - <span style="color: var(--cyber-cyan);">events</span>: Query flagship hackathons & sessions
-  - <span style="color: var(--cyber-cyan);">clear</span>: Flush console buffer`,
-      about: () => `ACM-W SNIoE CHAPTER [Association for Computing Machinery - Women]
-Mission: Building an inclusive, empowering tech ecosystem for women leaders, engineers, and creators.`,
+  <span style="color: var(--cyber-cyan);">about</span>    - Print chapter core directive
+  <span style="color: var(--cyber-cyan);">team</span>     - Print leadership and domain leads
+  <span style="color: var(--cyber-cyan);">events</span>   - Print signature events & hackathons
+  <span style="color: var(--cyber-cyan);">awards</span>   - Display national & university accolades
+  <span style="color: var(--cyber-cyan);">clear</span>    - Wipe the console screen`,
+      about: () => `ACM-W (Association for Computing Machinery - Women's Chapter) at Shiv Nadar Institution of Eminence is dedicated to fostering gender diversity and technical excellence across computing and engineering disciplines.`,
       team: () => `Active Operators:
 - Paridhi Kumar [Chairperson]
 - Anvi Gupta [Vice Chairperson]
@@ -545,9 +516,9 @@ Mission: Building an inclusive, empowering tech ecosystem for women leaders, eng
 - Mirambika Patel [Content Lead]
 - Shreeym Sharma & Shivani [Marketing Leads]
 - Parishi Garg & Anya Maheshwari [Event Management Leads]`,
-      awards: () => `🏆 Best Emerging Women Chapter in Region 2 (ACM India)
-🏆 Most Consistent Society of the Year (Among 60+ SNU Clubs)
-🏆 Top Technical Society 2024-25 (Club Wars)`,
+      awards: () => `[HONOR] Best Emerging Women Chapter in Region 2 (ACM India)
+[HONOR] Most Consistent Society of the Year (Among 60+ SNU Clubs)
+[HONOR] Top Technical Society 2024-25 (Club Wars)`,
       events: () => `Flagships:
 - LevelUp Buildathon (Inter-college Web Dev Sprint)
 - CryptX Files (34hr online crypthunt with 150+ devs)
@@ -613,7 +584,7 @@ Mission: Building an inclusive, empowering tech ecosystem for women leaders, eng
     if (audioToggle) {
       audioToggle.addEventListener('click', () => {
         isSoundEnabled = !isSoundEnabled;
-        audioToggle.textContent = isSoundEnabled ? '🔊 AUDIO: ON' : '🔇 AUDIO: OFF';
+        audioToggle.textContent = isSoundEnabled ? 'AUDIO: ON' : 'AUDIO: OFF';
         if (isSoundEnabled) playSynthSound('click');
       });
     }

@@ -1180,7 +1180,7 @@ button {
   position: relative;
   overflow: hidden;
   transition: transform 0.4s var(--ease-smooth), border-color 0.3s, box-shadow 0.3s;
-  cursor: pointer;
+  cursor: default;
 }
 
 .team-card:hover {
@@ -1218,7 +1218,7 @@ button {
   left: 10px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   padding: 4px 10px;
   background: rgba(4, 10, 20, 0.88);
   backdrop-filter: blur(8px);
@@ -1228,12 +1228,61 @@ button {
   font-size: 0.68rem;
   color: var(--terminal-green);
   text-transform: uppercase;
+  letter-spacing: 0.04em;
+  z-index: 2;
 }
 
 .team-status-chip .dot {
   width: 6px;
   height: 6px;
   background: var(--terminal-green);
+  border-radius: 50%;
+}
+
+.team-status-chip.core {
+  color: #60a5fa;
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(8, 20, 40, 0.9);
+}
+
+.team-status-chip.core .dot {
+  background: #60a5fa;
+  box-shadow: 0 0 6px #60a5fa;
+}
+
+.team-status-chip.subcore {
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.4);
+  background: rgba(22, 12, 38, 0.9);
+}
+
+.team-status-chip.subcore .dot {
+  background: #c084fc;
+  box-shadow: 0 0 6px #c084fc;
+}
+
+.team-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.team-tier-badge.core {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+}
+
+.team-tier-badge.subcore {
+  background: rgba(168, 85, 247, 0.15);
+  color: #d8b4fe;
+  border: 1px solid rgba(192, 132, 252, 0.35);
 }
 
 .team-info-body {
