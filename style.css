@@ -842,6 +842,49 @@ button {
   z-index: 0;
 }
 
+/* Hero YouTube Button */
+
+.hero-youtube-btn {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #0099d8;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.2);
+
+  text-decoration: none;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.play-icon {
+  width: 0;
+  height: 0;
+
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-left: 21px solid #ffffff;
+
+  margin-left: 5px;
+}
+
+.hero-youtube-btn:hover {
+  transform: scale(1.06);
+
+  background: rgba(0, 153, 216, 0.12);
+
+  box-shadow:
+    0 0 20px rgba(0, 153, 216, 0.35);
+}
 
 /* =========================================
    HERO CONTENT
